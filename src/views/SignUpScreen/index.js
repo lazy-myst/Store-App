@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, TextInput, ScrollView } from "react-native"
+import { View, StyleSheet, Image, Text, TextInput, KeyboardAvoidingView } from "react-native"
 import GreenBtn from "../../components/GreenBtn"
 import { useRef, useState } from 'react'
 import HeroHeading from "../../components/HeroHeading"
@@ -20,12 +20,12 @@ function SignUpScreen({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <View style={styles.headingContainer}>
+            <KeyboardAvoidingView
+                behavior="position" style={styles.headingContainer}>
                 <View >
                     <HeroHeading mainSize={50} subSize={25} />
                 </View>
-                <View
-                    style={styles.formContainer}>
+                <View style={styles.formContainer}>
                     <View style={styles.tInputSection}>
                         <TextInput
                             style={styles.textInput}
@@ -96,7 +96,7 @@ function SignUpScreen({ navigation }) {
                         </Text>
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         </View>
     )
 }
@@ -106,17 +106,13 @@ export default SignUpScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
     },
     headingContainer: {
-        position: 'absolute',
         alignSelf: 'center',
-        top: 80
+        paddingTop: 80
     },
     formContainer: {
-        marginTop: 70,
+        marginTop: 60,
         alignSelf: 'center',
         width: '80%'
     },
