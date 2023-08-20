@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Image, TextInput, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Category from '../../../components/UserComponents/Category'
+import ProductItem from '../../../components/UserComponents/ProductItem'
 
 
 
@@ -24,42 +25,107 @@ const categories = [
     {
         name: 'Chinese',
         image: require('../../../../assets/grocerypic.jpg')
+    },
+    {
+        name: 'Japanese',
+        image: require('../../../../assets/grocerypic.jpg')
+    }
+]
+const products = [
+    {
+        name: 'Meat',
+        price: '800',
+        description: 'product description',
+        abcdescription: 'product abc description',
+        image: require('../../../../assets/meatpic.jpg')
+    },
+    {
+        name: 'Fish',
+        price: '1600',
+        description: 'product description',
+        abcdescription: 'product abc description',
+        image: require('../../../../assets/meatpic.jpg')
+    },
+    {
+        name: 'Vegetables',
+        price: '200',
+        description: 'product description',
+        abcdescription: 'product abc description',
+        image: require('../../../../assets/meatpic.jpg')
+    },
+    {
+        name: 'Grocery',
+        price: '5000',
+        description: 'product description',
+        abcdescription: 'product abc description',
+        image: require('../../../../assets/meatpic.jpg')
+    },
+    {
+        name: 'Lobster',
+        price: '3000',
+        description: 'product description',
+        abcdescription: 'product abc description',
+        image: require('../../../../assets/meatpic.jpg')
     }
 ]
 
 function HomeScreen() {
     return (
         <View style={styles.container}>
-            <View style={styles.topBarContainer}>
-                <View>
-                    <Text style={styles.heading}>Saylani welfare</Text>
-                    <Text style={styles.subHeading}>discount store</Text>
+            <View style={styles.upperSection}>
+                <View style={styles.topBarContainer}>
+                    <View>
+                        <Text style={styles.heading}>Saylani welfare</Text>
+                        <Text style={styles.subHeading}>discount store</Text>
+                    </View>
+                    <View>
+                        <MaterialCommunityIcons color='#000' name='cart-variant' size={30} />
+                    </View>
                 </View>
-                <View>
-                    <MaterialCommunityIcons color='#000' name='cart-variant' size={30} />
+                <View style={styles.imgContainer}>
+                    <Image
+                        source={require('../../../../assets/Grocery.png')}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Search by product name'
+                        placeholderTextColor='#BFBCBC'
+                        inlineImageLeft='searchicon'
+                        inlineImagePadding={20}
+                    />
+                </View>
+                <View style={styles.categoriesContainer}>
+                    <Text style={styles.categoriesText}>Shop by Category</Text>
+                    <ScrollView
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        style={styles.categories}>
+                        {categories.map((item, index) => {
+                            return <Category key={index} itemName={item.name} imageUri={item.image} />
+                        })}
+                    </ScrollView>
                 </View>
             </View>
-            <View style={styles.imgContainer}>
-                <Image
-                    source={require('../../../../assets/Grocery.png')}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Search by product name'
-                    placeholderTextColor='#BFBCBC'
-                    inlineImageLeft='searchicon'
-                    inlineImagePadding={20}
-                />
-            </View>
-            <View style={styles.categoriesContainer}>
-                <Text style={styles.categoriesText}>Shop by Category</Text>
-                <ScrollView horizontal={true} style={styles.categories}>
-                    {categories.map((item, index) => {
-                        return <Category key={index} itemName={item.name} imageUri={item.image} />
-                    })}
-                </ScrollView>
+            <View style={styles.scrollSection}>
+                <View style={styles.productContainer}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        {products.map((item, index) => {
+                            return (
+                                <ProductItem
+                                    key={index}
+                                    productName={item.name}
+                                    productPrice={item.price}
+                                    productImg={item.image}
+                                    productDescription={item.description}
+                                    productabcDescription={item.abcdescription}
+                                />
+                            )
+                        })}
+                    </ScrollView>
+
+                </View>
             </View>
         </View>
     )
@@ -73,8 +139,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 15,
     },
+    upperSection: {
+        flex: 3,
+        alignItems: 'center',
+        width: '100%'
+    },
     topBarContainer: {
-        top: 30,
+        paddingTop: 20,
+        top: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -97,6 +169,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginTop: 20,
+        height: 40,
         width: '100%',
     },
     input: {
@@ -119,24 +192,17 @@ const styles = StyleSheet.create({
     categories: {
         marginTop: 10
     },
-    category: {
-        borderRadius: 15,
-        borderColor: '#61B846',
-        borderWidth: 1,
-        marginHorizontal: 10,
-        width: 85,
-        height: 50,
-        overflow: 'hidden'
-    },
-    categoryContainer: {
-        alignItems: 'center'
-    },
-    categoryText: {
-        color: '#61B846'
-    },
     categoryImages: {
         objectFit: 'fill',
         height: 50,
         width: 85
-    }
+    },
+    scrollSection: {
+        flex: 2
+    },
+    productContainer: {
+        marginTop: 15,
+        alignItems: 'flex-start',
+    },
+
 })
