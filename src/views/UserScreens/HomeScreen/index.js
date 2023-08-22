@@ -94,6 +94,7 @@ function HomeScreen() {
                         placeholderTextColor='#BFBCBC'
                         inlineImageLeft='searchicon'
                         inlineImagePadding={20}
+                        editable={false}
                     />
                 </View>
                 <View style={styles.categoriesContainer}>
@@ -146,7 +147,6 @@ const styles = StyleSheet.create({
     },
     topBarContainer: {
         paddingTop: 20,
-        top: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

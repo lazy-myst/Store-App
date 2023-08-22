@@ -1,12 +1,12 @@
 import { Pressable, Text, StyleSheet } from "react-native"
 
 
-function GreenBtn(props) {
+function GreenBtn({ title, onPress }) {
     return (
         <Pressable
-            onPress={props.func}
+            onPress={onPress}
             style={styles.btn}>
-            <Text style={styles.btnText}>{props.title}</Text>
+            <Text style={styles.btnText}>{title}</Text>
         </Pressable>
     )
 }

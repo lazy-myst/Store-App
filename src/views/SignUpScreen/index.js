@@ -84,7 +84,7 @@ function SignUpScreen({ navigation }) {
                         />
                     </View>
                     <View style={styles.loginbtn}>
-                        <GreenBtn title='Sign Up' func={handleSubmit} />
+                        <GreenBtn title='Sign Up' onPress={handleSubmit} />
                     </View>
                     <View style={styles.regsTextContainer}>
                         <Text style={styles.regsText}>Already have an account ? </Text>

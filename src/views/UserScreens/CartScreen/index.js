@@ -1,13 +1,23 @@
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
-import { useState } from 'react'
+import { StyleSheet, View, Text, Image, ScrollView, TextInput } from 'react-native'
+import { useState, useRef } from 'react'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
-import AntIcons from 'react-native-vector-icons/AntDesign'
+import CartItem from '../../../components/UserComponents/CartItems'
+import GreenBtn from '../../../components/GreenBtn'
 
 function CartScreen() {
-    const [count, setCount] = useState(0)
 
-    const itemPrice = 50
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [contactNo, setContactNo] = useState("")
+    const [address, setAddress] = useState("")
 
+    const emailInputRef = useRef()
+    const contactInputRef = useRef()
+    const addressInputref = useRef()
+
+    const placeOrder = () => {
+
+    }
 
     return (
         <View style={styles.container}>
@@ -31,38 +41,63 @@ function CartScreen() {
                 <View style={styles.scrollContainer}>
                     <ScrollView
                         showsVerticalScrollIndicator={false}>
-                        <View style={styles.itemContainer}>
-                            <View style={styles.itemImgContainer}>
-                                <Image
-                                    source={require('../../../../assets/grocerypic.jpg')}
-                                    style={styles.itemImg} />
-                            </View>
-                            <View style={styles.itemDetailsContainer}>
-                                <View style={styles.itemCounterContainer}>
-                                    <Text style={styles.itemName}>item name</Text>
-                                    <View style={styles.counter}>
-                                        <TouchableOpacity
-                                            onPress={() => count <= 0 ? setCount(count) : setCount(count - 1)}>
-                                            <AntIcons name='minus' size={15} color='black' />
-                                        </TouchableOpacity>
-                                        <View style={styles.count}>
-                                            <Text style={styles.countText}>{count}</Text>
-                                        </View>
-                                        <TouchableOpacity
-                                            onPress={() => setCount(count + 1)}>
-                                            <AntIcons name='plus' size={15} color='black' />
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>Rs.{itemPrice * count}</Text>
-                                </View>
-                            </View>
-                        </View>
+                        {/* items will be mapped here */}
+                        <CartItem name='Item Name' price={50} />
                     </ScrollView>
                 </View>
             </View>
-            <View style={styles.lowerSection}></View>
+            <View style={styles.lowerSection}>
+                <View style={styles.totalContainer}>
+                    <Text style={styles.totalText}>Total</Text>
+                    <Text style={styles.priceText}>Rs 185.00</Text>
+                </View>
+                <ScrollView
+                    contentContainerStyle={{ flex: 1, minHeight: 300 }}
+                    showsVerticalScrollIndicator={false}>
+                    <View style={styles.formContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText={(text) => setName(text)}
+                            placeholder="Full Name"
+                            placeholderTextColor={"#D4D3D3"}
+                            returnKeyType="next"
+                            onSubmitEditing={() => { emailInputRef.current.focus() }}
+                        />
+                        <TextInput
+                            ref={emailInputRef}
+                            style={styles.textInput}
+                            onChangeText={(text) => setEmail(text)}
+                            placeholder="Email"
+                            placeholderTextColor={"#D4D3D3"}
+                            returnKeyType="next"
+                            onSubmitEditing={() => { contactInputRef.current.focus() }}
+                        />
+                        <TextInput
+                            ref={contactInputRef}
+                            style={styles.textInput}
+                            onChangeText={(text) => setContactNo(text)}
+                            placeholder="Phone Number"
+                            placeholderTextColor={"#D4D3D3"}
+                            returnKeyType="next"
+                            onSubmitEditing={() => { addressInputref.current.focus() }}
+                        />
+                        <TextInput
+                            ref={addressInputref}
+                            style={[styles.textInput, { flex: 2 }]}
+                            onChangeText={(text) => setAddress(text)}
+                            placeholder="Shipping Address"
+                            placeholderTextColor={"#D4D3D3"}
+                            returnKeyType="done"
+                            onSubmitEditing={() => placeOrder()}
+                        />
+                        <View style={styles.orderBtn}>
+                            <GreenBtn
+                                title='Place Order'
+                                onPress={placeOrder()} />
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
         </View>
     )
 }
@@ -79,7 +114,8 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     lowerSection: {
-        flex: 2
+        flex: 2,
+        paddingHorizontal: 20
     },
     userIconContainer: {
         width: '100%',
@@ -115,61 +151,41 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         paddingTop: 15,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        flex: 1,
+        borderColor: '#bfbcbc'
     },
-    itemContainer: {
+    totalContainer: {
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%'
+        justifyContent: 'space-between',
+        paddingTop: 15
     },
-    itemImgContainer: {
-        width: '30%',
-        height: 80,
-        borderRadius: 15,
-        overflow: 'hidden'
+    totalText: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold'
     },
-    itemImg: {
-        height: 80,
-        width: 'auto',
-        objectFit: 'fill'
-    },
-    itemDetailsContainer: {
-        width: '70%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    itemCounterContainer: {
-        height: 80,
-        paddingTop: 10
-    },
-    itemName: {
-        fontSize: 15,
+    priceText: {
+        color: '#61B846',
         fontWeight: 'bold',
-        color: 'black',
-        textTransform: 'uppercase',
-        marginLeft: 10,
-    },
-    itemPrice: {
-        color: 'black',
         fontSize: 20
     },
-    counter: {
-        marginTop: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '50%',
+    formContainer: {
+        width: '100%',
+        flex: 1,
         justifyContent: 'space-around',
-        marginLeft: 10
     },
-    count: {
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        backgroundColor: '#bfbcbc',
-        borderRadius: 10
+    textInput: {
+        borderBottomWidth: 1,
+        borderColor: '#D4D3D3',
+        width: '80%',
+        fontSize: 20,
+        color: 'black'
     },
-    countText: {
-        color: 'black',
-        fontSize: 15
+    orderBtn: {
+        paddingVertical: 15
     }
 })

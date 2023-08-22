@@ -55,7 +55,7 @@ function LoginScreen({ navigation }) {
                     {/*it'll be Pressable and Function for Forgot Password */}
                     <Text style={styles.ftPwdStyle}>Forgot Password ?</Text>
                     <View style={styles.loginbtn}>
-                        <GreenBtn title='Sign In' func={handleSubmit} />
+                        <GreenBtn title='Sign In' onPress={handleSubmit} />
                     </View>
                     <View style={styles.regsTextContainer}>
                         <Text style={styles.regsText}>Dont have an account ? </Text>
