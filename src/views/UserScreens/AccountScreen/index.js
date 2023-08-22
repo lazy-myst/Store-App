@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import AntDesignIcons from 'react-native-vector-icons/AntDesign'
 import CartItem from '../../../components/UserComponents/CartItems'
 import GreenBtn from '../../../components/GreenBtn'
+import OrderItem from '../../../components/UserComponents/OrderItem'
 
 function CartScreen() {
 
@@ -38,6 +39,22 @@ function CartScreen() {
                 </View>
             </View>
             <View style={styles.lowerSection}>
+                <View style={styles.orderTextContainer}>
+                    <Text style={styles.orderText}>Orders</Text>
+                </View>
+                <View style={styles.orderScrollContainer}>
+                    <ScrollView contentContainerStyle={styles.orderScroll}>
+                        <OrderItem />
+                        <OrderItem />
+                        <OrderItem />
+                        <OrderItem />
+                        <OrderItem />
+                        <OrderItem />
+                    </ScrollView>
+                </View>
+                <View style={styles.logoutBtnContainer}>
+                    <GreenBtn title='logout' onPress={logoutHandler()} />
+                </View>
             </View>
         </View>
     )
@@ -58,7 +75,7 @@ const styles = StyleSheet.create({
     },
     lowerSection: {
         flex: 3,
-        paddingHorizontal: 20
+        paddingHorizontal: 15
     },
     mainHeading: {
         color: '#024F9D',
@@ -92,5 +109,80 @@ const styles = StyleSheet.create({
     },
     checkBtn: {
         width: '10%',
+    },
+    orderTextContainer: {
+        paddingTop: 40
+    },
+    orderText: {
+        color: '#024F9D',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    orderScrollContainer: {
+        paddingTop: 20,
+        flex: 1,
+    },
+    orderScroll: {
+        paddingHorizontal: 20
+    },
+    orderItem: {
+        width: '100%',
+        borderBottomColor: '#d9d9d9',
+        borderBottomWidth: 4,
+        marginVertical: 10
+    },
+    orderDetails: {
+        paddingHorizontal: 20
+    },
+    orderName: {
+        paddingVertical: 1
+    },
+    orderUsername: {
+        color: 'black',
+        fontSize: 25,
+    },
+    orderStatusContainer: {
+        flexDirection: 'row',
+        paddingVertical: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%'
+    },
+    orderStatus: {
+        color: 'black',
+        fontSize: 10
+    },
+    orderNumber: {
+        color: 'black',
+        fontSize: 10
+    },
+    orderItems: {
+        paddingVertical: 1
+    },
+    orderItemName: {
+        color: '#bfbfbf',
+        fontSize: 15
+    },
+    orderPrice: {
+        flexDirection: 'row',
+        paddingTop: 2,
+        paddingBottom: 10,
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    orderTotal: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black'
+    },
+    totalPrice: {
+        fontSize: 20,
+        color: '#61B846',
+        fontWeight: 'bold'
+    },
+    logoutBtnContainer: {
+        paddingVertical: 20,
+        paddingHorizontal: 10
     }
 })
